@@ -1,0 +1,26 @@
+version: 0.1
+
+env:
+  variables:
+    # This S3 stores all the CloudFormation templates in this project used as nested stack
+    # use an existing bucket or create a new one.
+    S3_BUCKET: "ecs-cloudformation-project-ravi"
+    # update TemplateURLs in master.yaml file to have corrosponding obhect URL from ${S#_BUCKET}  
+
+phases:
+
+  pre_build: 
+    commands:
+
+      # Validate all of the CloudFormation templates
+      - chmod a+x ./tests/validate-templates.sh
+      - ./tests/validate-templates.sh
+      # For First build you may need to create an s3 bucket if you dont have one 
+      # - aws s3 mb s3://${S3_BUCKET}
+
+  build:
+    commands:
+
+      # Sync the templates
+      - aws s3 sync . s3://${S3_BUCKET}
+
