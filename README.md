@@ -16,6 +16,7 @@ The repository consists of a set of nested templates that deploy the following:
  - Centralized container logging with Amazon CloudWatch Logs.
  - A Lambda Function and Auto Scaling Lifecycle Hook to drain Tasks from your Container Instances when an Instance is selected for Termination in your Auto Scaling Group.
 
+![Architecture](images/architecture-overview.png)
 
 ## Template details
 
